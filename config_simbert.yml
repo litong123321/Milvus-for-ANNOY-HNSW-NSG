@@ -1,0 +1,16 @@
+language: zh
+#bert-serving-start -pooling_layer -4 -3 -2 -1 -pooling_strategy REDUCE_MEAN -model_dir D:/code/RASA_20200902/en_intent/en_intent/chinese_wwm_ext_L-12_H-768_A-12
+#bert-serving-start -model_dir=/home/litong/bert-simbert/model/chinese_wwm_ext_L-12_H-768_A-12 -pooling_layer -2 -1 -pooling_strategy REDUCE_MAX
+pipeline:
+#  - name: "dataProcess"
+#    stopwords: ["啊","你好","对了",
+#                "对","那","嗯","呀","啊","阿","了","呃","额","的","啥","吧","吗","哦","么",
+#                "，","。","？","！"]
+  - name: "BertFeaturizerServer"
+    mode: "1"
+    http_path: "http://121.36.172.209:8126/encode"
+
+#  - name: "SklearnIntentClassifier"
+  - name: "Sgd_match"
+
+#bert-serving-start -model_dir=/home/litong/bert-simbert/model/chinese_wwm_ext_L-12_H-768_A-12 -tuned_model_dir=/home/litong/bert-simbert/model/output -ckpt_name=model.ckpt-1170
